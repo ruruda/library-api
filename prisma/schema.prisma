@@ -14,11 +14,44 @@ datasource db {
 }
 
 model Book {
-  id     Int    @id @default(autoincrement())
-  code   String @unique
+  id     Int     @id @default(autoincrement())
+  code   String  @unique
   title  String
   author String
   stock  Int
+  borrow Borrow[]
 
   @@map("books")
+}
+
+model Member {
+  id      Int      @id @default(autoincrement())
+  code    String   @unique
+  name    String
+  borrow  Borrow[]
+  penalty Penalty?
+
+  @@map("members")
+}
+
+model Borrow {
+  id         Int       @id @default(autoincrement())
+  memberId   Int
+  bookId     Int
+  borrowDate DateTime  @default(now())
+  returnDate DateTime?
+  member     Member    @relation(fields: [memberId], references: [id], map: "borrows_member_id_fk")
+  book       Book      @relation(fields: [bookId], references: [id], map: "borrows_book_id_fk")
+
+  @@map("borrows")
+}
+
+model Penalty {
+  id        Int      @id @default(autoincrement())
+  memberId  Int      @unique(map: "penalties_member_id_unique")
+  startDate DateTime @default(now())
+  endDate   DateTime
+  member    Member   @relation(fields: [memberId], references: [id], map: "penalties_member_id_fk")
+
+  @@map("penalties")
 }
