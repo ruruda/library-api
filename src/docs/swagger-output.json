@@ -1,0 +1,94 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Library API",
+		"description": "Library API",
+		"version": "1.0.0"
+	},
+	"host": "localhost:8000",
+	"basePath": "/",
+	"schemes": ["http"],
+	"paths": {
+		"/api/members": {
+			"get": {
+				"tags": ["Members"],
+				"description": "",
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/members/borrows": {
+			"post": {
+				"tags": ["Members"],
+				"description": "Request for borrowing a book",
+				"consumes": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "",
+						"schema": {
+							"type": "object",
+							"required": ["memberCode", "bookCode"],
+							"properties": {
+								"memberCode": {
+									"type": "string"
+								},
+								"bookCode": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/members/return": {
+			"post": {
+				"tags": ["Members"],
+				"description": "Request for returning a book",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "",
+						"schema": {
+							"type": "object",
+							"required": ["memberCode", "bookCode"],
+							"properties": {
+								"memberCode": {
+									"type": "string"
+								},
+								"bookCode": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/books": {
+			"get": {
+				"tags": ["Books"],
+				"description": "",
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	}
+}

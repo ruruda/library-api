@@ -22,6 +22,9 @@ const get = async () => {
 };
 
 const borrowBook = async (request) => {
+	if (!request.memberCode || !request.bookCode) {
+		throw new ResponseError(400, 'Please provide memberCode and bookCode');
+	}
 	const transaction = await prismaClient.$transaction(async (prisma) => {
 		const member = await prisma.member.findUnique({
 			where: {
@@ -98,6 +101,9 @@ const borrowBook = async (request) => {
 };
 
 const returnBook = async (request) => {
+	if (!request.memberCode || !request.bookCode) {
+		throw new ResponseError(400, 'Please provide memberCode and bookCode');
+	}
 	const transaction = await prismaClient.$transaction(async (prisma) => {
 		const member = await prisma.member.findUnique({
 			where: {
