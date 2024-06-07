@@ -72,7 +72,7 @@ const borrowBook = async (request) => {
 			throw new ResponseError(404, 'Book not found');
 		}
 
-		if (book.borrow.length > 0) {
+		if (book.stock < 1) {
 			throw new ResponseError(400, 'Book already borrowed by another member');
 		}
 

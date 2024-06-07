@@ -23,12 +23,12 @@
 		"/api/members/borrows": {
 			"post": {
 				"tags": ["Members"],
-				"description": "Request for borrowing a book",
+				"description": "Request borrow book",
 				"consumes": ["application/json"],
 				"parameters": [
 					{
 						"in": "body",
-						"name": "",
+						"name": "Edit Request",
 						"schema": {
 							"type": "object",
 							"required": ["memberCode", "bookCode"],
@@ -53,11 +53,11 @@
 		"/api/members/return": {
 			"post": {
 				"tags": ["Members"],
-				"description": "Request for returning a book",
+				"description": "",
 				"parameters": [
 					{
 						"in": "body",
-						"name": "",
+						"name": "Edit Request",
 						"schema": {
 							"type": "object",
 							"required": ["memberCode", "bookCode"],

@@ -3,11 +3,11 @@ import { prismaClient } from '../application/database.js';
 const getAll = async () => {
 	const books = await prismaClient.book.findMany({
 		where: {
-			borrow: { none: {} },
+			stock: {
+				gt: 0,
+			},
 		},
-		include: {
-			borrow: true,
-		},
+		orderBy: { id: 'asc' },
 	});
 	return books;
 };
